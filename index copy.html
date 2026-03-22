@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brim Express Group — Expedited Delivery Across the USA</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --lime: #8DC63F;
+    --lime-bright: #A8E044;
+    --lime-dark: #6FA82F;
+    --navy: #1C2B3A;
+    --navy-light: #243547;
+    --white: #FFFFFF;
+    --off-white: #F5F7F2;
+    --gray: #8A9BAA;
+    --text: #1C2B3A;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Barlow', sans-serif; background: var(--white); color: var(--text); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw; height: 70px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; }
+  .nav-logo-circle {
+    width: 44px; height: 44px;
+    border: 2.5px solid var(--lime); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+  .nav-logo-text { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 18px; letter-spacing: 0.05em; line-height: 1.15; }
+  .nav-logo-text span { color: var(--lime); display: block; }
+  .nav-logo-text small { color: var(--white); font-size: 11px; font-weight: 400; letter-spacing: 0.15em; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--lime); }
+  .nav-cta { background: var(--lime) !important; color: var(--navy) !important; padding: 10px 22px; border-radius: 2px; font-weight: 700 !important; transition: background 0.2s !important; border: none; cursor: pointer; font-family: 'Barlow', sans-serif; }
+  .nav-cta:hover { background: var(--lime-bright) !important; }
+  .nav-links button { background: none; border: none; cursor: pointer; font-family: 'Barlow', sans-serif; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; padding: 0; }
+  .nav-links button:hover { color: var(--lime); }
+  .required-star { color: var(--lime); margin-left: 3px; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; background: var(--navy);
+    display: flex; align-items: center;
+    position: relative; overflow: hidden; padding-top: 70px;
+  }
+  .hero-bg-lines {
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(-15deg, transparent, transparent 60px, rgba(141,198,63,0.04) 60px, rgba(141,198,63,0.04) 61px);
+  }
+  .hero-road { position: absolute; bottom: 0; left: 0; right: 0; height: 5px; background: var(--lime); opacity: 0.5; }
+  .hero-road::before {
+    content: ''; position: absolute; top: -18px; left: 0; right: 0; height: 2px;
+    background: repeating-linear-gradient(90deg, rgba(255,255,255,0.12) 0, rgba(255,255,255,0.12) 40px, transparent 40px, transparent 70px);
+  }
+  .hero-inner {
+    position: relative; z-index: 2; padding: 80px 5vw;
+    max-width: 1200px; margin: 0 auto; width: 100%;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(141,198,63,0.12); border: 1px solid rgba(141,198,63,0.3);
+    border-radius: 2px; padding: 6px 14px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--lime);
+    margin-bottom: 24px;
+  }
+  .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--lime); animation: pulse 1.8s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.4); } }
+  .hero-title {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+    font-size: clamp(52px, 7vw, 86px); line-height: 0.92;
+    color: var(--white); letter-spacing: -0.01em; margin-bottom: 24px;
+  }
+  .hero-title .accent { color: var(--lime); }
+  .hero-sub { font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.65); line-height: 1.7; max-width: 480px; margin-bottom: 40px; }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--lime); color: var(--navy);
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 15px; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 15px 32px; border-radius: 2px; text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    border: none; cursor: pointer;
+  }
+  .btn-primary:hover { background: var(--lime-bright); transform: translateY(-2px); }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 10px;
+    border: 1.5px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.8);
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
+    font-size: 15px; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 15px 32px; border-radius: 2px; text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+    background: none; cursor: pointer;
+  }
+  .btn-outline:hover { border-color: var(--lime); color: var(--lime); }
+  .hero-stats { display: flex; gap: 36px; margin-top: 48px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); }
+  .hero-stat-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 38px; color: var(--lime); line-height: 1; }
+  .hero-stat-label { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.4); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; }
+  .hero-visual { display: flex; align-items: center; justify-content: center; position: relative; }
+  .hero-truck-wrap { animation: floatTruck 4s ease-in-out infinite; position: relative; }
+  @keyframes floatTruck { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+  .hero-truck-svg { width: 100%; max-width: 520px; }
+  .hero-glow {
+    position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%);
+    width: 70%; height: 36px;
+    background: radial-gradient(ellipse, rgba(141,198,63,0.3) 0%, transparent 70%);
+    filter: blur(10px);
+  }
+
+  /* FEATURES BAND */
+  .features-band { background: var(--lime); padding: 22px 5vw; display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
+  .feature-pill { display: flex; align-items: center; gap: 10px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); }
+  .feature-pill svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+  /* SECTIONS */
+  .section { padding: 100px 5vw; max-width: 1200px; margin: 0 auto; }
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--lime-dark); margin-bottom: 12px; }
+  .section-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(38px, 5vw, 58px); line-height: 0.95; color: var(--navy); margin-bottom: 16px; }
+  .section-sub { font-size: 16px; font-weight: 300; color: var(--gray); max-width: 520px; line-height: 1.7; }
+
+  /* SERVICES */
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 56px; background: rgba(28,43,58,0.08); }
+  .service-card { background: var(--white); padding: 44px 36px; position: relative; overflow: hidden; transition: background 0.25s; }
+  .service-card::before { content: ''; position: absolute; bottom: 0; left: 0; height: 3px; width: 0; background: var(--lime); transition: width 0.35s ease; }
+  .service-card:hover { background: var(--off-white); }
+  .service-card:hover::before { width: 100%; }
+  .service-icon { width: 52px; height: 52px; background: rgba(141,198,63,0.12); border-radius: 4px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; font-size: 24px; }
+  .service-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 22px; color: var(--navy); margin-bottom: 12px; }
+  .service-desc { font-size: 14px; color: var(--gray); line-height: 1.75; }
+
+  /* FLEET */
+  .fleet-section { background: var(--navy); padding: 100px 5vw; }
+  .fleet-inner { max-width: 1200px; margin: 0 auto; }
+  .fleet-section .section-title { color: var(--white); }
+  .fleet-section .section-sub { color: rgba(255,255,255,0.5); }
+  .fleet-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 56px; }
+  .fleet-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; padding: 40px; position: relative; overflow: hidden; transition: border-color 0.25s, background 0.25s; }
+  .fleet-card:hover { border-color: rgba(141,198,63,0.4); background: rgba(141,198,63,0.05); }
+  .fleet-card-count { position: absolute; top: 28px; right: 32px; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 72px; color: rgba(141,198,63,0.07); line-height: 1; pointer-events: none; }
+  .fleet-tag { display: inline-block; background: rgba(141,198,63,0.15); color: var(--lime); font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; padding: 5px 12px; border-radius: 2px; margin-bottom: 20px; }
+  .fleet-make { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 32px; color: var(--white); margin-bottom: 6px; }
+  .fleet-model { font-size: 14px; color: rgba(255,255,255,0.4); margin-bottom: 24px; }
+  .fleet-specs { display: flex; gap: 16px; flex-wrap: wrap; }
+  .fleet-spec { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.65); }
+  .fleet-spec-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--lime); flex-shrink: 0; }
+
+  /* WHY */
+  .why-section { padding: 100px 5vw; background: var(--off-white); }
+  .why-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .why-items { display: flex; flex-direction: column; gap: 0; margin-top: 48px; }
+  .why-item { display: flex; gap: 24px; padding: 28px 0; border-bottom: 1px solid rgba(28,43,58,0.1); align-items: flex-start; }
+  .why-item:first-child { padding-top: 0; }
+  .why-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 44px; color: var(--lime); line-height: 1; flex-shrink: 0; width: 52px; }
+  .why-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 20px; color: var(--navy); margin-bottom: 6px; }
+  .why-desc { font-size: 14px; color: var(--gray); line-height: 1.7; }
+  .coverage-block { background: var(--navy); border-radius: 8px; padding: 48px 40px; text-align: center; position: relative; overflow: hidden; }
+  .coverage-block::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(141,198,63,0.025) 10px, rgba(141,198,63,0.025) 11px); }
+  .coverage-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 120px; color: var(--lime); line-height: 0.85; position: relative; z-index: 1; }
+  .coverage-label { font-size: 15px; color: rgba(255,255,255,0.6); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 12px; position: relative; z-index: 1; }
+  .coverage-sub { font-size: 13px; color: rgba(255,255,255,0.35); margin-top: 6px; position: relative; z-index: 1; }
+  .state-badges { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: 28px; position: relative; z-index: 1; max-height: 120px; overflow: hidden; mask-image: linear-gradient(to bottom, black 60%, transparent); }
+  .state-badge { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.4); font-size: 11px; font-weight: 600; letter-spacing: 0.05em; padding: 4px 10px; border-radius: 2px; }
+
+  /* CONTACT */
+  .contact-section { padding: 100px 5vw; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .contact-form { display: flex; flex-direction: column; gap: 16px; margin-top: 40px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-field { display: flex; flex-direction: column; gap: 6px; }
+  .form-field label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy); }
+  .form-field input, .form-field textarea, .form-field select { background: var(--off-white); border: 1.5px solid transparent; border-radius: 2px; padding: 13px 16px; font-family: 'Barlow', sans-serif; font-size: 14px; color: var(--navy); transition: border-color 0.2s; outline: none; appearance: none; }
+  .form-field input:focus, .form-field textarea:focus, .form-field select:focus { border-color: var(--lime); background: var(--white); }
+  .form-field textarea { resize: vertical; min-height: 110px; }
+  .form-submit { background: var(--navy); color: var(--white); border: none; padding: 16px 36px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; border-radius: 2px; transition: background 0.2s, transform 0.2s; align-self: flex-start; }
+  .form-submit:hover { background: var(--lime); color: var(--navy); transform: translateY(-2px); }
+  .contact-info-block { margin-top: 40px; display: flex; flex-direction: column; gap: 28px; }
+  .contact-info-item { display: flex; gap: 20px; align-items: flex-start; }
+  .contact-icon { width: 44px; height: 44px; background: rgba(141,198,63,0.1); border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 20px; }
+  .contact-info-label { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--lime-dark); margin-bottom: 4px; }
+  .contact-info-value { font-size: 15px; color: var(--navy); font-weight: 500; }
+
+  /* FOOTER */
+  footer { background: var(--navy); padding: 60px 5vw 32px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 32px; }
+  .footer-brand p { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.75; margin-top: 16px; max-width: 300px; }
+  .footer-logo-text { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 24px; color: var(--white); letter-spacing: 0.04em; }
+  .footer-logo-text span { color: var(--lime); }
+  .footer-col-title { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 20px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-col a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--lime); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
+  .footer-tagline { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; color: var(--lime); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* ANIMATIONS */
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .fleet-grid { grid-template-columns: 1fr; }
+    .why-inner { grid-template-columns: 1fr; }
+    .contact-section { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+    .features-band { gap: 24px; }
+    .hero-stats { gap: 20px; flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-circle">🚚</div>
+    <div class="nav-logo-text">
+      <span>BRIM EXPRESS</span>
+      <small>GROUP</small>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><button onclick="scrollTo('services')">Services</button></li>
+    <li><button onclick="scrollTo('fleet')">Fleet</button></li>
+    <li><button onclick="scrollTo('coverage')">Coverage</button></li>
+    <li><button class="nav-cta" onclick="scrollTo('contact')">Get a Quote</button></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-lines"></div>
+  <div class="hero-road"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">24/7 Dispatch & Tracking</div>
+      <h1 class="hero-title">
+        FAST.<br>
+        RELIABLE.<br>
+        <span class="accent">EXPEDITED.</span>
+      </h1>
+      <p class="hero-sub">Brim Express Group delivers on time, every time — across all 48 contiguous US states. Professional drivers, real-time tracking, and a fleet ready to roll day or night.</p>
+      <div class="hero-actions">
+        <button onclick="scrollTo('contact')" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14z"/></svg>
+          Get a Quote
+        </button>
+        <button onclick="scrollTo('fleet')" class="btn-outline">View Our Fleet →</button>
+      </div>
+      <div class="hero-stats">
+        <div><div class="hero-stat-num">5</div><div class="hero-stat-label">Trucks</div></div>
+        <div><div class="hero-stat-num">48</div><div class="hero-stat-label">States</div></div>
+        <div><div class="hero-stat-num">24/7</div><div class="hero-stat-label">Dispatch</div></div>
+        <div><div class="hero-stat-num">3+</div><div class="hero-stat-label">Yrs Experience</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-truck-wrap">
+        <svg class="hero-truck-svg" viewBox="0 0 520 310" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="260" cy="292" rx="200" ry="14" fill="rgba(141,198,63,0.12)"/>
+          <!-- Box body -->
+          <rect x="30" y="75" width="310" height="175" rx="5" fill="#243547"/>
+          <!-- Stripe detail -->
+          <rect x="30" y="75" width="310" height="8" rx="5" fill="#8DC63F" opacity="0.5"/>
+          <!-- Box horizontal lines -->
+          <line x1="30" y1="108" x2="340" y2="108" stroke="#1C2B3A" stroke-width="2"/>
+          <line x1="30" y1="141" x2="340" y2="141" stroke="#1C2B3A" stroke-width="2"/>
+          <line x1="30" y1="174" x2="340" y2="174" stroke="#1C2B3A" stroke-width="2"/>
+          <line x1="30" y1="207" x2="340" y2="207" stroke="#1C2B3A" stroke-width="2"/>
+          <line x1="30" y1="240" x2="340" y2="240" stroke="#1C2B3A" stroke-width="2"/>
+          <!-- Logo text on box -->
+          <text x="55" y="165" font-family="Arial Black, sans-serif" font-weight="900" font-size="18" fill="rgba(141,198,63,0.4)" letter-spacing="2">BRIM EXPRESS</text>
+          <!-- Cab -->
+          <rect x="340" y="115" width="135" height="135" rx="8" fill="#8DC63F"/>
+          <!-- Windshield -->
+          <rect x="352" y="124" width="88" height="66" rx="5" fill="#1C2B3A" opacity="0.75"/>
+          <!-- Cab lower -->
+          <rect x="352" y="198" width="52" height="46" rx="3" fill="#6FA82F"/>
+          <circle cx="398" cy="221" r="3.5" fill="#1C2B3A"/>
+          <!-- Hood -->
+          <rect x="432" y="190" width="65" height="60" rx="5" fill="#6FA82F"/>
+          <!-- Headlight -->
+          <rect x="482" y="196" width="20" height="14" rx="3" fill="#FFFDE7" opacity="0.95"/>
+          <rect x="482" y="196" width="20" height="14" rx="3" fill="none" stroke="#8DC63F" stroke-width="1"/>
+          <!-- Grille -->
+          <rect x="434" y="214" width="46" height="28" rx="2" fill="#1C2B3A"/>
+          <line x1="434" y1="221" x2="480" y2="221" stroke="#8DC63F" stroke-width="1.5" opacity="0.6"/>
+          <line x1="434" y1="228" x2="480" y2="228" stroke="#8DC63F" stroke-width="1.5" opacity="0.6"/>
+          <line x1="434" y1="235" x2="480" y2="235" stroke="#8DC63F" stroke-width="1.5" opacity="0.6"/>
+          <!-- Bumper -->
+          <rect x="430" y="242" width="70" height="8" rx="2" fill="#1C2B3A"/>
+          <!-- Wheels -->
+          <circle cx="105" cy="268" r="35" fill="#111"/>
+          <circle cx="105" cy="268" r="23" fill="#243547"/>
+          <circle cx="105" cy="268" r="11" fill="#8DC63F"/>
+          <circle cx="215" cy="268" r="35" fill="#111"/>
+          <circle cx="215" cy="268" r="23" fill="#243547"/>
+          <circle cx="215" cy="268" r="11" fill="#8DC63F"/>
+          <circle cx="422" cy="268" r="30" fill="#111"/>
+          <circle cx="422" cy="268" r="19" fill="#243547"/>
+          <circle cx="422" cy="268" r="9" fill="#8DC63F"/>
+          <!-- Ground line -->
+          <line x1="0" y1="300" x2="520" y2="300" stroke="#8DC63F" stroke-width="3" opacity="0.25"/>
+        </svg>
+        <div class="hero-glow"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES BAND -->
+<div class="features-band">
+  <div class="feature-pill">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    24/7 Dispatch
+  </div>
+  <div class="feature-pill">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    Real-Time Tracking
+  </div>
+  <div class="feature-pill">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+    Expert Drivers
+  </div>
+  <div class="feature-pill">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+    48-State Coverage
+  </div>
+  <div class="feature-pill">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    Est. 2022
+  </div>
+</div>
+
+<!-- SERVICES -->
+<div id="services" style="background: var(--white);">
+  <div class="section fade-up">
+    <div class="section-label">What We Do</div>
+    <h2 class="section-title">BUILT FOR<br>SPEED & PRECISION</h2>
+    <p class="section-sub">From time-critical shipments to heavy palletized cargo — we have the equipment and expertise to move it fast.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">⚡</div>
+        <div class="service-title">Expedited Delivery</div>
+        <p class="service-desc">When standard shipping isn't fast enough. We specialize in time-sensitive loads that need to move immediately — no delays, no excuses.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📦</div>
+        <div class="service-title">Box Truck Freight</div>
+        <p class="service-desc">Our Mercedes-Benz and Ford Transit 16 ft box trucks handle cargo of all kinds with professional care and secure transport across all 48 states.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🏗️</div>
+        <div class="service-title">Liftgate Service</div>
+        <p class="service-desc">Need ground-level loading or unloading? One of our Mercedes-Benz trucks is equipped with a liftgate for heavy or palletized freight.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📡</div>
+        <div class="service-title">Live Tracking</div>
+        <p class="service-desc">Know where your freight is at all times. We provide real-time GPS tracking so you're never left wondering about your shipment's location.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🗺️</div>
+        <div class="service-title">Nationwide Coverage</div>
+        <p class="service-desc">Operating across all 48 contiguous US states. Whether coast to coast or cross-region, Brim Express Group gets it there.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📞</div>
+        <div class="service-title">24/7 Dispatch</div>
+        <p class="service-desc">Our dispatch team is available around the clock. Emergency freight, last-minute loads — we're always ready to roll, day or night.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FLEET -->
+<section class="fleet-section" id="fleet">
+  <div class="fleet-inner">
+    <div class="section-label" style="color: rgba(141,198,63,0.7);">Our Equipment</div>
+    <h2 class="section-title">THE FLEET</h2>
+    <p class="section-sub">5 professional trucks — maintained, insured, and ready for dispatch right now.</p>
+    <div class="fleet-grid fade-up">
+      <div class="fleet-card">
+        <div class="fleet-card-count">4</div>
+        <div class="fleet-tag">4 Units</div>
+        <div class="fleet-make">Mercedes-Benz</div>
+        <div class="fleet-model">Box Truck — Standard Fleet</div>
+        <div class="fleet-specs">
+          <div class="fleet-spec"><span class="fleet-spec-dot"></span>16 ft Box</div>
+          <div class="fleet-spec"><span class="fleet-spec-dot"></span>High Payload Capacity</div>
+          <div class="fleet-spec"><span class="fleet-spec-dot"></span>GPS Equipped</div>
+          <div class="fleet-spec"><span class="fleet-spec-dot"></span>Fully Insured</div>
+        </div>
+      </div>
+      <div class="fleet-card">
+        <div class="fleet-card-count">★</div>
+        <div class="fleet-tag">Liftgate Unit</div>
+        <div class="fleet-make">Mercedes-Benz</div>
+        <div class="fleet-model">Box Truck — Liftgate Equipped</div>
+        <div class="fleet-specs">
+          <div class="fleet-spec"><span class="fleet-spec-dot"></span>16 ft Box</div>
+          <div class="fleet-spec"><span class="fleet-spec-dot"></span>Rear Liftgate</div>
+          <div class="fleet-spec"><span class="fleet-spec-dot"></span>Heavy Freight Ready</div>
+          <div class="fleet-spec"><span class="fleet-spec-dot"></span>Pallet Capable</div>
+        </div>
+      </div>
+      <div class="fleet-card">
+        <div class="fleet-card-count">1</div>
+        <div class="fleet-tag">Transit Unit</div>
+        <div class="fleet-make">Ford Transit</div>
+        <div class="fleet-model">High-Roof Box Truck</div>
+        <div class="fleet-specs">
+          <div class="fleet-spec"><span class="fleet-spec-dot"></span>16 ft Box</div>
+          <div class="fleet-spec"><span class="fleet-spec-dot"></span>Agile & Efficient</div>
+          <div class="fleet-spec"><span class="fleet-spec-dot"></span>Urban Friendly</div>
+          <div class="fleet-spec"><span class="fleet-spec-dot"></span>GPS Equipped</div>
+        </div>
+      </div>
+      <div class="fleet-card" style="background: rgba(141,198,63,0.06); border-color: rgba(141,198,63,0.2);">
+        <div class="fleet-tag" style="background: rgba(141,198,63,0.2);">Every Truck</div>
+        <div class="fleet-make">Fleet Standards</div>
+        <div class="fleet-model">Across our entire operation</div>
+        <div class="fleet-specs">
+          <div class="fleet-spec"><span class="fleet-spec-dot"></span>Professionally Maintained</div>
+          <div class="fleet-spec"><span class="fleet-spec-dot"></span>DOT Compliant</div>
+          <div class="fleet-spec"><span class="fleet-spec-dot"></span>Experienced Drivers</div>
+          <div class="fleet-spec"><span class="fleet-spec-dot"></span>Fully Insured</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US / COVERAGE -->
+<section class="why-section" id="coverage">
+  <div class="why-inner">
+    <div class="fade-up">
+      <div class="section-label">Why Choose Us</div>
+      <h2 class="section-title">THE BRIM<br>DIFFERENCE</h2>
+      <div class="why-items">
+        <div class="why-item">
+          <div class="why-num">01</div>
+          <div>
+            <div class="why-title">Operating Since 2022</div>
+            <p class="why-desc">Our experienced drivers know the roads and the business. Every haul backed by years of expedited freight expertise.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">02</div>
+          <div>
+            <div class="why-title">24/7 Dispatch — Always On</div>
+            <p class="why-desc">Freight doesn't sleep and neither does our dispatch. Reach us any time of day or night for bookings and status updates.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">03</div>
+          <div>
+            <div class="why-title">Modern Premium Fleet</div>
+            <p class="why-desc">4 Mercedes-Benz box trucks (one with liftgate) plus a Ford Transit — all 16 ft, well-maintained, and fully insured.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">04</div>
+          <div>
+            <div class="why-title">48 States Covered</div>
+            <p class="why-desc">No matter where your freight needs to go within the contiguous US, Brim Express Group will get it there professionally.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fade-up">
+      <div class="coverage-block">
+        <div class="coverage-num">48</div>
+        <div class="coverage-label">States Covered</div>
+        <div class="coverage-sub">All Contiguous United States</div>
+        <div class="state-badges">
+          <span class="state-badge">AL</span><span class="state-badge">AZ</span><span class="state-badge">AR</span><span class="state-badge">CA</span>
+          <span class="state-badge">CO</span><span class="state-badge">CT</span><span class="state-badge">DE</span><span class="state-badge">FL</span>
+          <span class="state-badge">GA</span><span class="state-badge">ID</span><span class="state-badge">IL</span><span class="state-badge">IN</span>
+          <span class="state-badge">IA</span><span class="state-badge">KS</span><span class="state-badge">KY</span><span class="state-badge">LA</span>
+          <span class="state-badge">ME</span><span class="state-badge">MD</span><span class="state-badge">MA</span><span class="state-badge">MI</span>
+          <span class="state-badge">MN</span><span class="state-badge">MS</span><span class="state-badge">MO</span><span class="state-badge">MT</span>
+          <span class="state-badge">NE</span><span class="state-badge">NV</span><span class="state-badge">NH</span><span class="state-badge">NJ</span>
+          <span class="state-badge">NM</span><span class="state-badge">NY</span><span class="state-badge">NC</span><span class="state-badge">ND</span>
+          <span class="state-badge">OH</span><span class="state-badge">OK</span><span class="state-badge">OR</span><span class="state-badge">PA</span>
+          <span class="state-badge">RI</span><span class="state-badge">SC</span><span class="state-badge">SD</span><span class="state-badge">TN</span>
+          <span class="state-badge">TX</span><span class="state-badge">UT</span><span class="state-badge">VT</span><span class="state-badge">VA</span>
+          <span class="state-badge">WA</span><span class="state-badge">WV</span><span class="state-badge">WI</span><span class="state-badge">WY</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background: var(--white);">
+  <div class="contact-section fade-up">
+    <div>
+      <div class="section-label">Get in Touch</div>
+      <h2 class="section-title">READY TO<br>SHIP?</h2>
+      <p class="section-sub" style="margin-bottom: 0;">Fill out the form and our dispatch team will respond immediately — or reach us directly anytime.</p>
+      <div class="contact-info-block">
+        <div class="contact-info-item">
+          <div class="contact-icon">📧</div>
+          <div>
+            <div class="contact-info-label">Dispatch Email</div>
+            <div class="contact-info-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3d59544e4d5c495e557d5f4f545058454d4f584e4e5a4f52484d135e5250">[email&#160;protected]</a></div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-info-label">Home Base</div>
+            <div class="contact-info-value">Corning, New York</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <div class="contact-info-label">Availability</div>
+            <div class="contact-info-value">24 Hours · 7 Days a Week</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon">🗺️</div>
+          <div>
+            <div class="contact-info-label">Service Area</div>
+            <div class="contact-info-value">48 Contiguous US States</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="margin-top: 56px;">
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-field">
+              <label>Your Name<span class="required-star">*</span></label>
+              <input type="text" placeholder="John Smith" required>
+            </div>
+            <div class="form-field">
+              <label>Company</label>
+              <input type="text" placeholder="Company Name">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label>Email<span class="required-star">*</span></label>
+              <input type="email" placeholder="you@company.com" required>
+            </div>
+            <div class="form-field">
+              <label>Phone</label>
+              <input type="tel" placeholder="(555) 000-0000">
+            </div>
+          </div>
+          <div class="form-field">
+            <label>Service Needed</label>
+            <select>
+              <option value="">Select a service...</option>
+              <option>Expedited Delivery</option>
+              <option>Box Truck Freight</option>
+              <option>Liftgate Service</option>
+              <option>Long-Haul Transport</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label>Pickup Location</label>
+              <input type="text" placeholder="City, State">
+            </div>
+            <div class="form-field">
+              <label>Delivery Location</label>
+              <input type="text" placeholder="City, State">
+            </div>
+          </div>
+          <div class="form-field">
+            <label>Shipment Details</label>
+            <textarea placeholder="Describe your freight — weight, dimensions, special requirements..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send Quote Request →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo-text">BRIM <span>EXPRESS</span> GROUP</div>
+        <p>Expedited freight delivery across all 48 contiguous US states. Professional drivers, modern fleet, and 24/7 dispatch — based in Corning, NY.</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Quick Links</div>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#fleet">Our Fleet</a></li>
+          <li><a href="#coverage">Coverage</a></li>
+          <li><a href="#contact">Get a Quote</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Contact</div>
+        <ul>
+          <li><a href="/cdn-cgi/l/email-protection#d4b0bda7a4b5a0b7bc94b6a6bdb9b1aca4a6b1a7a7b3a6bba1a4fab7bbb9"><span class="__cf_email__" data-cfemail="0d69647e7d6c796e654d6f7f646068757d7f687e7e6a7f62787d236e6260">[email&#160;protected]</span></a></li>
+          <li><a href="#">Corning, New York</a></li>
+          <li><a href="#">24/7 Available</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Brim Express Group. All rights reserved.</div>
+      <div class="footer-tagline">Always Moving Forward</div>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-submit');
+    btn.textContent = '✓ Request Sent!';
+    btn.style.background = 'var(--lime)';
+    btn.style.color = 'var(--navy)';
+    setTimeout(() => {
+      btn.textContent = 'Send Quote Request →';
+      btn.style.background = '';
+      btn.style.color = '';
+    }, 3000);
+  }
+
+  function scrollTo(id) {
+    const target = document.getElementById(id);
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+</script>
+</body>
+</html>
