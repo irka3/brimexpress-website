@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Brim Express Group | Expedited Freight Delivery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --black: #0d1420;
+      --dark: #111d2e;
+      --panel: #162338;
+      --border: #1e3050;
+      --green: #7cb938;
+      --green-light: #96d44a;
+      --white: #eef2f7;
+      --muted: #7a90b0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 3rem;
+      background: rgba(13,20,32,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo img {
+      height: 54px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 0 8px rgba(124,185,56,0.3));
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--green); }
+
+    .nav-cta {
+      background: var(--green) !important;
+      color: #fff !important;
+      padding: 0.5rem 1.3rem !important;
+      font-weight: 700 !important;
+      border-radius: 2px;
+    }
+
+    .nav-cta:hover { background: var(--green-light) !important; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 3rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(13,20,32,0.2) 0%, rgba(13,20,32,0.9) 65%, var(--black) 100%),
+        linear-gradient(135deg, #0d1420 0%, #1a2a4a 50%, #0f1c30 100%);
+    }
+
+    .hero-diagonal {
+      position: absolute;
+      top: 0; right: -5%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(135deg, transparent 40%, rgba(124,185,56,0.04) 100%);
+      clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
+    }
+
+    .road-lines {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg,
+        transparent 0%, transparent 40%,
+        var(--green) 40%, var(--green) 42%,
+        transparent 42%, transparent 48%,
+        var(--green) 48%, var(--green) 50%,
+        transparent 50%);
+      background-size: 200px 4px;
+      animation: roadMove 2s linear infinite;
+      opacity: 0.4;
+    }
+
+    @keyframes roadMove {
+      from { background-position: 0 0; }
+      to   { background-position: 200px 0; }
+    }
+
+    .hero-eyebrow {
+      position: relative;
+      font-size: 0.75rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--green);
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--green);
+    }
+
+    .hero h1 {
+      position: relative;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(4rem, 10vw, 8.5rem);
+      line-height: 0.92;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      max-width: 900px;
+    }
+
+    .hero h1 .line-accent { color: var(--green); }
+
+    .hero-sub {
+      position: relative;
+      margin-top: 2rem;
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 500px;
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    .hero-actions {
+      position: relative;
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: #fff;
+      padding: 0.9rem 2.2rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover { background: var(--green-light); transform: translateY(-2px); }
+
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: var(--white);
+      padding: 0.9rem 2.2rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s;
+      display: inline-block;
+    }
+
+    .btn-outline:hover { border-color: var(--green); color: var(--green); }
+
+    /* STATS STRIP */
+    .stats-strip {
+      background: #1a2a4a;
+      border-top: 3px solid var(--green);
+      border-bottom: 3px solid var(--green);
+      padding: 1.4rem 3rem;
+      display: flex;
+      justify-content: space-around;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-item { text-align: center; }
+
+    .stat-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 2rem;
+      line-height: 1;
+      color: var(--green);
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    /* SECTIONS */
+    section { padding: 6rem 3rem; }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--green);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      text-transform: uppercase;
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+
+    /* FLEET */
+    #fleet { background: var(--dark); }
+
+    .fleet-intro {
+      max-width: 800px;
+      margin: 0 auto 4rem;
+      text-align: center;
+    }
+
+    .fleet-intro .section-title { margin-bottom: 1rem; }
+    .fleet-intro p { color: var(--muted); font-size: 1rem; line-height: 1.7; }
+
+    .fleet-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .fleet-card {
+      background: var(--panel);
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.25s;
+    }
+
+    .fleet-card:hover { background: #1c2e47; }
+
+    .fleet-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--green);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+
+    .fleet-card:hover::before { transform: scaleX(1); }
+
+    .fleet-icon { font-size: 2.5rem; margin-bottom: 1.5rem; display: block; }
+
+    .fleet-card h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+
+    .fleet-badge {
+      display: inline-block;
+      background: rgba(124,185,56,0.15);
+      color: var(--green);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+      margin-bottom: 1rem;
+    }
+
+    .fleet-badge.lift    { background: rgba(230,100,100,0.15); color: #e67e73; }
+    .fleet-badge.transit { background: rgba(74,144,226,0.12);  color: #74b0f0; }
+
+    .fleet-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+
+    .fleet-specs { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; }
+
+    .spec-row {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      padding-top: 0.5rem;
+      font-size: 0.82rem;
+    }
+
+    .spec-key { color: var(--muted); }
+    .spec-val { color: var(--white); font-weight: 500; }
+
+    /* SERVICES */
+    #services { background: var(--black); }
+
+    .services-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+      max-width: 1100px;
+    }
+
+    .services-left .section-title { margin-bottom: 1.5rem; }
+    .services-left p { color: var(--muted); line-height: 1.8; margin-bottom: 2rem; }
+
+    .service-list { display: flex; flex-direction: column; gap: 1rem; }
+
+    .service-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.2rem;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .service-item:hover { border-color: var(--green); background: rgba(124,185,56,0.03); }
+    .service-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem; }
+
+    .service-item h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .service-item p { color: var(--muted); font-size: 0.85rem; line-height: 1.5; margin: 0; }
+
+    .coverage-box {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .coverage-box h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .us-map-svg { width: 100%; max-width: 420px; opacity: 0.8; }
+    .coverage-note { margin-top: 1rem; font-size: 0.82rem; color: var(--muted); letter-spacing: 0.08em; }
+
+    /* WHY US */
+    #why { background: var(--dark); }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .why-card {
+      padding: 2rem;
+      border-left: 3px solid var(--green);
+      background: var(--panel);
+    }
+
+    .why-card h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.6rem;
+    }
+
+    .why-card p { color: var(--muted); font-size: 0.88rem; line-height: 1.65; }
+
+    /* CONTACT */
+    #contact { background: var(--black); }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+      max-width: 1100px;
+    }
+
+    .contact-left .section-title { margin-bottom: 1rem; }
+    .contact-left p { color: var(--muted); line-height: 1.8; margin-bottom: 1.5rem; }
+
+    .contact-info-block { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem; }
+
+    .contact-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.2rem 1.4rem;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    a.contact-row:hover { border-color: var(--green); background: rgba(124,185,56,0.04); }
+
+    .contact-row-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.1rem; }
+
+    .contact-row-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .contact-row-value {
+      color: var(--green);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+    }
+
+    .contact-row-value.plain {
+      color: var(--white);
+      font-size: 0.92rem;
+      font-family: 'Barlow', sans-serif;
+      font-weight: 400;
+    }
+
+    .hours-block {
+      padding: 1.2rem 1.4rem;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+    }
+
+    .hours-big { font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 700; margin-top: 0.3rem; }
+    .hours-sub { color: var(--muted); font-size: 0.82rem; margin-top: 0.2rem; }
+
+    /* FORM */
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+    .form-group label {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      color: var(--white);
+      padding: 0.75rem 1rem;
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.9rem;
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--green); }
+
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-group select option { background: var(--panel); }
+
+    .submit-btn {
+      background: var(--green);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      padding: 1rem 2rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: background 0.2s;
+      width: 100%;
+    }
+
+    .submit-btn:hover { background: var(--green-light); }
+
+    /* FOOTER */
+    footer {
+      background: var(--panel);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.3rem; }
+    .footer-copy { font-size: 0.8rem; color: var(--muted); }
+    .footer-email { color: var(--green); font-size: 0.85rem; text-decoration: none; }
+    .footer-addr { font-size: 0.78rem; color: var(--muted); }
+
+    /* ANIMATIONS */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { top: 0; padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { padding: 0 1.5rem 5rem; }
+      section { padding: 4rem 1.5rem; }
+      .services-layout, .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .why-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+      .footer-right { align-items: flex-start; }
+      .stats-strip { padding: 1.2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><img src="data:image/png;base64,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" alt="Brim Express Group"/></div>
+  <ul class="nav-links">
+    <li><a href="#fleet">Fleet</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-diagonal"></div>
+  <div class="road-lines"></div>
+  <div class="hero-eyebrow">Expedited Freight Specialists · Est. 2022</div>
+  <h1>We Move<br/><span class="line-accent">America's</span><br/>Cargo Fast.</h1>
+  <p class="hero-sub">Nationwide expedited delivery with a dedicated fleet of Mercedes Sprinter and Ford Transit trucks — reliable, fast, and built for time-sensitive freight.</p>
+  <div class="hero-actions">
+    <a href="#contact" class="btn-primary">Request a Shipment</a>
+    <a href="#fleet" class="btn-outline">View Our Fleet</a>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stat-item">
+    <div class="stat-num">2022</div>
+    <div class="stat-label">Est. Year</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">5</div>
+    <div class="stat-label">Active Trucks</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">16ft</div>
+    <div class="stat-label">Box Capacity</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">48</div>
+    <div class="stat-label">States Covered</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">24/7</div>
+    <div class="stat-label">Dispatch Available</div>
+  </div>
+</div>
+
+<!-- FLEET -->
+<section id="fleet">
+  <div class="fleet-intro fade-up">
+    <div class="section-label">Our Fleet</div>
+    <h2 class="section-title">Built for Speed &amp; Reliability</h2>
+    <p>Five purpose-built delivery vehicles ready to haul your time-sensitive freight across the country. Every truck is maintained to the highest standards.</p>
+  </div>
+
+  <div class="fleet-grid">
+    <div class="fleet-card fade-up">
+      <span class="fleet-icon">🚚</span>
+      <h3>Mercedes Sprinter #1</h3>
+      <span class="fleet-badge">Standard Cargo</span>
+      <p>High-roof Mercedes Sprinter with a full 16ft box — ideal for palletized freight and oversized cargo running coast to coast.</p>
+      <div class="fleet-specs">
+        <div class="spec-row"><span class="spec-key">Box Length</span><span class="spec-val">16 ft</span></div>
+        <div class="spec-row"><span class="spec-key">Type</span><span class="spec-val">Sprinter Box</span></div>
+        <div class="spec-row"><span class="spec-key">Lift Gate</span><span class="spec-val">No</span></div>
+      </div>
+    </div>
+
+    <div class="fleet-card fade-up">
+      <span class="fleet-icon">🚚</span>
+      <h3>Mercedes Sprinter #2</h3>
+      <span class="fleet-badge">Standard Cargo</span>
+      <p>Dependable Sprinter box truck running nationwide routes with maximum uptime and full cargo protection.</p>
+      <div class="fleet-specs">
+        <div class="spec-row"><span class="spec-key">Box Length</span><span class="spec-val">16 ft</span></div>
+        <div class="spec-row"><span class="spec-key">Type</span><span class="spec-val">Sprinter Box</span></div>
+        <div class="spec-row"><span class="spec-key">Lift Gate</span><span class="spec-val">No</span></div>
+      </div>
+    </div>
+
+    <div class="fleet-card fade-up">
+      <span class="fleet-icon">🏗️</span>
+      <h3>Mercedes Sprinter #3</h3>
+      <span class="fleet-badge lift">Lift Gate Equipped</span>
+      <p>Our lift-gate Sprinter — perfect for heavy freight and locations without dock access. Load and unload anywhere, no dock needed.</p>
+      <div class="fleet-specs">
+        <div class="spec-row"><span class="spec-key">Box Length</span><span class="spec-val">16 ft</span></div>
+        <div class="spec-row"><span class="spec-key">Type</span><span class="spec-val">Sprinter Box</span></div>
+        <div class="spec-row"><span class="spec-key">Lift Gate</span><span class="spec-val">✅ Yes</span></div>
+      </div>
+    </div>
+
+    <div class="fleet-card fade-up">
+      <span class="fleet-icon">🚚</span>
+      <h3>Mercedes Sprinter #4</h3>
+      <span class="fleet-badge">Standard Cargo</span>
+      <p>Fourth Sprinter in the fleet, adding maximum flexibility for simultaneous multi-load operations across the country.</p>
+      <div class="fleet-specs">
+        <div class="spec-row"><span class="spec-key">Box Length</span><span class="spec-val">16 ft</span></div>
+        <div class="spec-row"><span class="spec-key">Type</span><span class="spec-val">Sprinter Box</span></div>
+        <div class="spec-row"><span class="spec-key">Lift Gate</span><span class="spec-val">No</span></div>
+      </div>
+    </div>
+
+    <div class="fleet-card fade-up">
+      <span class="fleet-icon">🚐</span>
+      <h3>Ford Transit</h3>
+      <span class="fleet-badge transit">Agile Delivery</span>
+      <p>Our Ford Transit box truck handles urban routes and tighter delivery windows with agility the larger rigs can't match.</p>
+      <div class="fleet-specs">
+        <div class="spec-row"><span class="spec-key">Box Length</span><span class="spec-val">16 ft</span></div>
+        <div class="spec-row"><span class="spec-key">Type</span><span class="spec-val">Transit Box</span></div>
+        <div class="spec-row"><span class="spec-key">Lift Gate</span><span class="spec-val">No</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-layout">
+    <div class="services-left fade-up">
+      <div class="section-label">What We Do</div>
+      <h2 class="section-title">Expedited<br/>Delivery<br/>Solutions</h2>
+      <p>When standard shipping isn't fast enough, Brim Express Group steps in. We specialize in time-critical freight that needs to move — now.</p>
+      <div class="service-list">
+        <div class="service-item">
+          <span class="service-icon">⚡</span>
+          <div>
+            <h4>Same-Day &amp; Next-Day</h4>
+            <p>Rush loads handled with urgency. We dispatch immediately and don't stop until your freight is delivered.</p>
+          </div>
+        </div>
+        <div class="service-item">
+          <span class="service-icon">🗺️</span>
+          <div>
+            <h4>Nationwide Coverage</h4>
+            <p>From coast to coast — we run all 48 continental states. No route is too long when the load needs to move.</p>
+          </div>
+        </div>
+        <div class="service-item">
+          <span class="service-icon">📦</span>
+          <div>
+            <h4>Exclusive Use Loads</h4>
+            <p>Your freight fills the truck — no sharing, no detours, no delays. Dedicated transport every time.</p>
+          </div>
+        </div>
+        <div class="service-item">
+          <span class="service-icon">🏗️</span>
+          <div>
+            <h4>Lift Gate Service</h4>
+            <p>No dock? No problem. Our lift-gate equipped Sprinter handles heavy pallets at ground-level locations.</p>
+          </div>
+        </div>
+        <div class="service-item">
+          <span class="service-icon">📡</span>
+          <div>
+            <h4>Real-Time Updates</h4>
+            <p>Stay informed at every mile. Our dispatch team keeps you updated from pickup to final delivery.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fade-up">
+      <div class="coverage-box">
+        <h3>Nationwide<br/><span style="color:var(--green)">Coverage</span></h3>
+        <svg class="us-map-svg" viewBox="0 0 960 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M180,80 L820,80 L870,160 L900,280 L870,400 L800,460 L720,500 L600,520 L460,510 L340,490 L220,450 L140,380 L100,280 L120,170 Z" fill="rgba(124,185,56,0.08)" stroke="rgba(124,185,56,0.3)" stroke-width="2"/>
+          <line x1="300" y1="80" x2="300" y2="490" stroke="rgba(124,185,56,0.1)" stroke-width="1"/>
+          <line x1="450" y1="80" x2="450" y2="510" stroke="rgba(124,185,56,0.1)" stroke-width="1"/>
+          <line x1="600" y1="80" x2="600" y2="500" stroke="rgba(124,185,56,0.1)" stroke-width="1"/>
+          <line x1="750" y1="80" x2="750" y2="460" stroke="rgba(124,185,56,0.1)" stroke-width="1"/>
+          <line x1="150" y1="200" x2="870" y2="200" stroke="rgba(124,185,56,0.1)" stroke-width="1"/>
+          <line x1="140" y1="320" x2="880" y2="320" stroke="rgba(124,185,56,0.1)" stroke-width="1"/>
+          <line x1="160" y1="420" x2="840" y2="430" stroke="rgba(124,185,56,0.1)" stroke-width="1"/>
+          <circle cx="200" cy="270" r="5" fill="#7cb938" opacity="0.9"/>
+          <circle cx="760" cy="180" r="5" fill="#7cb938" opacity="0.9"/>
+          <circle cx="480" cy="220" r="5" fill="#7cb938" opacity="0.9"/>
+          <circle cx="680" cy="350" r="5" fill="#7cb938" opacity="0.9"/>
+          <circle cx="300" cy="380" r="5" fill="#7cb938" opacity="0.9"/>
+          <line x1="200" y1="270" x2="760" y2="180" stroke="rgba(124,185,56,0.3)" stroke-width="1.5" stroke-dasharray="6 4"/>
+          <line x1="760" y1="180" x2="680" y2="350" stroke="rgba(124,185,56,0.3)" stroke-width="1.5" stroke-dasharray="6 4"/>
+          <line x1="200" y1="270" x2="300" y2="380" stroke="rgba(124,185,56,0.3)" stroke-width="1.5" stroke-dasharray="6 4"/>
+          <line x1="480" y1="220" x2="680" y2="350" stroke="rgba(124,185,56,0.3)" stroke-width="1.5" stroke-dasharray="6 4"/>
+          <line x1="300" y1="380" x2="680" y2="350" stroke="rgba(124,185,56,0.3)" stroke-width="1.5" stroke-dasharray="6 4"/>
+        </svg>
+        <p class="coverage-note">Serving all 48 continental states</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="fade-up">
+    <div class="section-label">Why Brim Express</div>
+    <h2 class="section-title">Speed. Reliability.<br/><span style="color:var(--green)">Results.</span></h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-card fade-up">
+      <h4>Established Since 2022</h4>
+      <p>Brim Express Group has been running expedited freight since 2022 — building a track record of on-time deliveries and trusted relationships with shippers across the country.</p>
+    </div>
+    <div class="why-card fade-up">
+      <h4>Dedicated Dispatch</h4>
+      <p>Our dispatch team operates around the clock. When you call with a time-critical load, we pick up and we move — no runarounds, no voicemail.</p>
+    </div>
+    <div class="why-card fade-up">
+      <h4>Modern Fleet</h4>
+      <p>Four Mercedes Sprinters and one Ford Transit — all maintained to commercial standards. Our equipment doesn't break down when you need it most.</p>
+    </div>
+    <div class="why-card fade-up">
+      <h4>Exclusive Use Guarantee</h4>
+      <p>Every load is an exclusive haul. Your freight never shares space with another client's cargo, meaning no cross-dock delays and no mix-ups.</p>
+    </div>
+    <div class="why-card fade-up">
+      <h4>Lift Gate Capability</h4>
+      <p>One of our Sprinters is fully lift-gate equipped — ready for locations without loading docks and for heavy pallet freight that needs ground access.</p>
+    </div>
+    <div class="why-card fade-up">
+      <h4>Nationwide Routes</h4>
+      <p>We've run freight in every corner of the continental US. No market is out of reach — if there's a road, we'll get your cargo there.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-layout">
+    <div class="contact-left fade-up">
+      <div class="section-label">Get in Touch</div>
+      <h2 class="section-title">Ready to<br/>Ship?</h2>
+      <p>Reach out to our dispatch team and we'll get your load moving as fast as possible. No load is too urgent — that's what we're built for.</p>
+
+      <div class="contact-info-block">
+        <a class="contact-row" href="/cdn-cgi/l/email-protection#305459434051445358705242595d5548404255434357425f45401e535f5d">
+          <span class="contact-row-icon">✉️</span>
+          <div>
+            <span class="contact-row-label">Email Dispatch</span>
+            <span class="contact-row-value">dispatch&#64;brimexpressgroup.com</span>
+          </div>
+        </a>
+
+        <div class="contact-row">
+          <span class="contact-row-icon">📍</span>
+          <div>
+            <span class="contact-row-label">Business Address</span>
+            <span class="contact-row-value plain">5 E Market St, Corning, New York 14830-2614, US</span>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <span class="contact-row-icon">🌐</span>
+          <div>
+            <span class="contact-row-label">Website</span>
+            <span class="contact-row-value">brimexpreesgroup.com</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hours-block">
+        <span class="contact-row-label">Dispatch Hours</span>
+        <div class="hours-big">24 / 7 / 365</div>
+        <div class="hours-sub">We never close. Freight doesn't sleep and neither do we.</div>
+      </div>
+    </div>
+
+    <div class="fade-up">
+      <div style="margin-bottom:1.2rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.3rem;text-transform:uppercase;letter-spacing:0.08em;">Request a Quote</div>
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" placeholder="John Smith"/>
+          </div>
+          <div class="form-group">
+            <label>Company</label>
+            <input type="text" placeholder="Your Company"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="you@company.com"/>
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="tel" placeholder="(555) 000-0000"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Pickup Location</label>
+            <input type="text" placeholder="City, State"/>
+          </div>
+          <div class="form-group">
+            <label>Delivery Location</label>
+            <input type="text" placeholder="City, State"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Service Needed</label>
+          <select>
+            <option value="">Select a service...</option>
+            <option>Same-Day Delivery</option>
+            <option>Next-Day Delivery</option>
+            <option>Standard Expedited</option>
+            <option>Lift Gate Required</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Freight Details</label>
+          <textarea placeholder="Describe your freight — dimensions, weight, special handling requirements..."></textarea>
+        </div>
+        <button class="submit-btn" onclick="handleSubmit(this)">Send Quote Request &#8594;</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="data:image/png;base64,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" alt="Brim Express Group" style="height:52px;width:auto;filter:drop-shadow(0 0 6px rgba(124,185,56,0.25));"/>
+  </div>
+  <div class="footer-right">
+    <div class="footer-copy">&#169; 2025 Brim Express Group &middot; Expedited Delivery Nationwide</div>
+    <a class="footer-email" href="/cdn-cgi/l/email-protection#305459434051445358705242595d5548404255434357425f45401e535f5d">dispatch&#64;brimexpressgroup.com</a>
+    <div class="footer-addr">5 E Market St, Corning, New York 14830-2614, US</div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const siblings = Array.from(entry.target.parentElement.children);
+        const delay = 80 * siblings.indexOf(entry.target);
+        setTimeout(() => entry.target.classList.add('visible'), delay);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 
